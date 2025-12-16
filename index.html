@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Pakhi ❤️</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
+body{background:linear-gradient(135deg,#ffd6e8,#fff0f5);height:100vh;overflow:hidden;}
+.page{position:absolute;inset:0;display:none;justify-content:center;align-items:center;flex-direction:column;text-align:center;padding:20px;animation:fade 1.2s ease;}
+.page.active{display:flex;}
+h1{font-size:2.3rem;color:#ff4d6d;margin-bottom:20px;}
+p{font-size:1.1rem;color:#444;line-height:1.8;max-width:600px;margin-bottom:25px;}
+button{padding:14px 38px;border:none;border-radius:35px;background:#ff4d6d;color:white;font-size:1.1rem;cursor:pointer;transition:0.3s;box-shadow:0 6px 18px rgba(255,77,109,0.3);}
+button:hover{background:#ff2e55;transform:scale(1.05);}
+.typing{font-size:1.1rem;color:#444;min-height:120px;}
+.heart{position:fixed;top:-10px;color:#ff4d6d;animation:fall linear forwards;}
+.love-final{font-size:2.8rem;color:#ff2e55;text-shadow:0 0 10px #ff8fab,0 0 20px #ff4d6d;animation:pulse 2s infinite;}
+@keyframes fade{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fall{to{transform:translateY(110vh);opacity:0;}}
+@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.08);}100%{transform:scale(1);}}
+@media(max-width:600px){h1,.love-final{font-size:2rem;}p,.typing{font-size:1rem;}button{padding:12px 28px;font-size:1rem;}}
+</style>
+</head>
+<body>
+
+<!-- Page 1 -->
+<div class="page active">
+    <h1>আমার পাখি ❤️</h1>
+    <button onclick="nextPage()">Next</button>
+</div>
+
+<!-- Page 2 -->
+<div class="page">
+    <h1>ভালোবাসি ❤️</h1>
+    <button onclick="nextPage()">Next</button>
+</div>
+
+<!-- Page 3 -->
+<div class="page">
+    <h1>আমার শোনা 💕</h1>
+    <button onclick="nextPage()">Next</button>
+</div>
+
+<!-- Page 4 -->
+<div class="page">
+    <h1>ভালোবাসি 💖</h1>
+    <button onclick="nextPage()">Next</button>
+</div>
+
+<!-- Page 5 -->
+<div class="page">
+    <p>এই দিনটা শুধু তোমার জন্য, পাখি 🌺</p>
+    <button onclick="nextPage()">Next</button>
+</div>
+
+<!-- Page 6 - Birthday Message -->
+<div class="page">
+    <h1>শুভ জন্মদিন, আমার জান 🎂🎉</h1>
+    <div class="typing" id="typingText"></div>
+    <button onclick="nextPage()">Next</button>
+</div>
+
+<!-- Page 7 - Final Love Message -->
+<div class="page">
+    <h1 class="love-final">I Love You Pakhi ❤️</h1>
+</div>
+
+<script>
+const pages=document.querySelectorAll('.page');
+let currentPage=0;
+
+function nextPage(){
+    pages[currentPage].classList.remove('active');
+    currentPage++;
+    if(currentPage<pages.length){
+        pages[currentPage].classList.add('active');
+        if(document.getElementById("typingText")) startTyping();
+    }
+}
+
+const text="পাখি,\nএই দিনটা শুধু জন্মদিন নয়,\nএটা আমার ভালোবাসার উৎসব।\nতুমি আমার পৃথিবী ❤️";
+let i=0;
+function startTyping(){
+    const el=document.getElementById("typingText");
+    if(i<text.length){
+        el.innerHTML+=text[i]==="\n"? "<br>":text[i];
+        i++;
+        setTimeout(startTyping,70);
+    }
+}
+
+// Heart animation
+setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(14+Math.random()*12)+"px";
+    heart.style.animationDuration=(4+Math.random()*3)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),7000);
+},400);
+</script>
+</body>
+</html>
